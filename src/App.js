@@ -1,24 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import Knight from './components/knight';
+import Square from './components/square';
+import Board from './components/board';
+import { observe } from './game'
+import React, { createContext, useEffect, useState } from 'react';
 
+export const PositionContext = React.createContext([0, 0]);
 function App() {
+
+  const [position, setPos] = useState([0, 0])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PositionContext.Provider value={[position, setPos]}>
+      <Board knightPosition={position} />  
+    </PositionContext.Provider>
+    
   );
 }
 
